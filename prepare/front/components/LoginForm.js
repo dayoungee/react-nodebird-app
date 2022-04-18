@@ -9,8 +9,12 @@ import styled from 'styled-components';
 //   margin-Top: 10px;
 // `;
 
+const FormWrapper = styled(Form)`
+  padding: 10;
+`;
 
-const LoginForm = () => {
+
+const LoginForm = ({ setIsLoggedIn }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,9 +28,17 @@ const LoginForm = () => {
 
   // 리렌더링 조심 ! 방법2) useMemo 사용. useMemo는 값을 캐싱, useCallback은 함수를 캐싱
   const style = useMemo(() => ({ marginTop: 10 }), []);
+  const stylePadding = useMemo(() => ({ padding: 10 }), []);
+
+  const onSubmitForm = useCallback(() => {
+    console.log({
+      id, password,
+    });
+    setIsLoggedIn(true);
+  }, [id, password]);
 
   return (
-    <Form>
+    <Form style = {stylePadding} onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
