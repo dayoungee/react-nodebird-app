@@ -30,7 +30,7 @@ const LoginForm = () => {
       id,
       password,
     });
-    dispatch(loginAction(id, password));
+    dispatch(loginAction({id, password}));
   }, [id, password]);
 
   return (
