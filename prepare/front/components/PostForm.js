@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { Form, Input, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { ADD_POST_REQUEST } from '../reducers/post';
+import { addPost } from '../reducers/post';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -20,11 +19,8 @@ const PostForm = () => {
     }
   }, [addPostDone]);
 
-  const onSubmitForm = useCallback(() => {
-    dispatch({
-      type: ADD_POST_REQUEST,
-      data: text,
-    });
+  const onSubmit = useCallback(() => {
+    dispatch(addPost(text));
   }, [text]);
 
   const onChangeText = useCallback((e) => {
@@ -32,7 +28,7 @@ const PostForm = () => {
   }, []);
 
   return (
-    <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onFinish={onSubmitForm}>
+    <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea maxLength={140} placeholder="어떤 신기한 일이 있었나요?" value={text} onChange={onChangeText} />
       <div>
         <input type="file" multiple hidden ref={imageInput} />

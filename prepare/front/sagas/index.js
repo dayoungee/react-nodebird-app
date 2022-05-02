@@ -5,6 +5,7 @@ import userSaga from './user';
 
 // 주소 중복된 값 주입
 axios.defaults.baseURL = 'http://localhost:3065';
+axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
   yield all([
